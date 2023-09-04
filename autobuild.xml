@@ -1,0 +1,10 @@
+<autobuild>
+    <target platform="win32" type="executable" output="main.exe">
+        <source type="cpp" file="main.cpp" />
+        <source group="testsource" />
+    </target>
+    <sourcegroup id="testsource">
+        <source type="cpp" file="test.cpp" />
+        <source type="cpp" file="test2.cpp" />
+    </sourcegroup>
+</autobuild>
