@@ -9,13 +9,20 @@ namespace Autobuild
 
 class SourceFile
 {
+public:
     std::string type;
-    std::string path;
+    std::string filename;
+};
+
+class ObjectFile
+{
+public:
     std::string filename;
 };
 
 class SourceGroup
 {
+public:
     std::string id;
     std::vector<SourceFile> sourceFiles;
 };
