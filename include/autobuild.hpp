@@ -22,13 +22,6 @@ public:
     std::string filename;
 };
 
-class SourceGroup
-{
-public:
-    std::string id;
-    std::vector<SourceFile> sourceFiles;
-};
-
 class CompileJob
 {
 public:
@@ -37,6 +30,13 @@ public:
 
     int execute();
     void initObjectFile();
+};
+
+class SourceGroup
+{
+public:
+    std::string id;
+    std::vector<CompileJob> compileJobs;
 };
 
 class Target

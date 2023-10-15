@@ -60,11 +60,10 @@ int AutobuildRepo::readAutobuildFile()
                 XmlElement* currentSourceGroupElement = currentElement->children[i].element;
                 if (currentSourceGroupElement->getElementName() == "source")
                 {
-                    SourceFile newSourceFile;
-                    newSourceFile.type = currentSourceGroupElement->getAttribute("type");
-                    newSourceFile.filename = currentSourceGroupElement->getAttribute("file");
-
-                    newSourceGroup.sourceFiles.push_back(newSourceFile);
+                    CompileJob newCompileJob;
+                    newCompileJob.source.type = currentSourceGroupElement->getAttribute("type");
+                    newCompileJob.source.filename = currentSourceGroupElement->getAttribute("file");
+                    newSourceGroup.compileJobs.push_back(newCompileJob);
                 }
             }
 
