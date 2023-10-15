@@ -10,13 +10,9 @@ int main(int argc, char** argv)
     AutobuildRepo repo;
     int result = repo.readAutobuildFile();
     
-    for (int i = 0; i < repo.sourceGroups.size(); i++)
-    {
-        repo.sourceGroups[i].initObjectFiles();
-        cout << "Compiling source group " << repo.sourceGroups[i].id << "... ";
-        repo.sourceGroups[i].executeCompileJobs();
-        cout << "done!" << endl;
-    }
+    cout << "Compiling source groups... ";
+    repo.compileSourceGroups();
+    cout << "done!" << endl;
 
     for (int i = 0; i < repo.targets.size(); i++)
     {

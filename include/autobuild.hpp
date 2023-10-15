@@ -63,6 +63,7 @@ public:
     std::vector<Target> targets;
     std::vector<SourceGroup> sourceGroups;
 
+    int compileSourceGroups();
     int readAutobuildFile();
 };
 
