@@ -54,6 +54,7 @@ public:
 
     int linkObjects(std::vector<SourceGroup> sourceGroups);
     void initObjectFiles();
+    int executeCompileJobs();
 };
 
 class AutobuildRepo

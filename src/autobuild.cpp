@@ -32,12 +32,9 @@ int main(int argc, char** argv)
             continue;
         }
 
-        for (int s = 0; s < repo.targets[i].compileJobs.size(); s++)
-        {
-            cout << "\tCompiling " << repo.targets[i].compileJobs[s].source.filename << " -> " << repo.targets[i].compileJobs[s].object.filename << "... ";
-            repo.targets[i].compileJobs[s].execute();
-            cout << "done!" << endl;
-        }
+        cout << "\tCompiling source files for this target...";
+        repo.targets[i].executeCompileJobs();
+        cout << "done!" << endl;
 
         cout << "\tLinking all object files to " << repo.targets[i].filenameOutput << "... ";
         repo.targets[i].linkObjects(repo.sourceGroups);
