@@ -13,16 +13,9 @@ int main(int argc, char** argv)
     for (int i = 0; i < repo.sourceGroups.size(); i++)
     {
         repo.sourceGroups[i].initObjectFiles();
-        cout << "Compiling source group " << repo.sourceGroups[i].id << "..." << endl;
-
-        for (int s = 0; s < repo.sourceGroups[i].compileJobs.size(); s++)
-        {
-            cout << "\tCompiling " << repo.sourceGroups[i].compileJobs[s].source.filename << " -> " << repo.sourceGroups[i].compileJobs[s].object.filename << "... ";
-            repo.sourceGroups[i].compileJobs[s].execute();
-            cout << "done!" << endl;
-        }
-
-        cout << endl;
+        cout << "Compiling source group " << repo.sourceGroups[i].id << "... ";
+        repo.sourceGroups[i].executeCompileJobs();
+        cout << "done!" << endl;
     }
 
     for (int i = 0; i < repo.targets.size(); i++)

@@ -39,6 +39,7 @@ public:
     std::vector<CompileJob> compileJobs;
 
     void initObjectFiles();
+    int executeCompileJobs();
 };
 
 class Target
