@@ -32,12 +32,17 @@ int main(int argc, char** argv)
 
     for (int i = 0; i < repo.sourceGroups.size(); i++)
     {
-        cout << "Source group #" << i << endl;
-        cout << "Id: " << repo.sourceGroups[i].id << endl;
+        cout << "Compiling source group " << repo.sourceGroups[i].id << "..." << endl;
 
         for (int s = 0; s < repo.sourceGroups[i].sourceFiles.size(); s++)
         {
-            cout << "\tSource file (" << repo.sourceGroups[i].sourceFiles[s].type << "): " << repo.sourceGroups[i].sourceFiles[s].filename << endl;
+            CompileJob compileJob;
+            compileJob.source = repo.sourceGroups[i].sourceFiles[s];
+            compileJob.initObjectFile();
+
+            cout << "\t" << compileJob.source.filename << " -> " << compileJob.object.filename << "... ";
+            compileJob.execute();
+            cout << "done!" << endl;
         }
 
         cout << endl;
