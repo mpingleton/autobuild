@@ -37,6 +37,8 @@ class SourceGroup
 public:
     std::string id;
     std::vector<CompileJob> compileJobs;
+
+    void initObjectFiles();
 };
 
 class Target
@@ -46,8 +48,10 @@ public:
     std::string platform;
     std::string type;
 
-    std::vector<SourceFile> sourceFiles;
+    std::vector<CompileJob> compileJobs;
     std::vector<std::string> sourceGroupIds;
+
+    void initObjectFiles();
 };
 
 class AutobuildRepo

@@ -12,13 +12,12 @@ int main(int argc, char** argv)
     
     for (int i = 0; i < repo.sourceGroups.size(); i++)
     {
+        repo.sourceGroups[i].initObjectFiles();
         cout << "Compiling source group " << repo.sourceGroups[i].id << "..." << endl;
 
         for (int s = 0; s < repo.sourceGroups[i].compileJobs.size(); s++)
         {
-            repo.sourceGroups[i].compileJobs[s].initObjectFile();
-
-            cout << "\t" << repo.sourceGroups[i].compileJobs[s].source.filename << " -> " << repo.sourceGroups[i].compileJobs[s].object.filename << "... ";
+            cout << "\tCompiling " << repo.sourceGroups[i].compileJobs[s].source.filename << " -> " << repo.sourceGroups[i].compileJobs[s].object.filename << "... ";
             repo.sourceGroups[i].compileJobs[s].execute();
             cout << "done!" << endl;
         }
@@ -28,22 +27,28 @@ int main(int argc, char** argv)
 
     for (int i = 0; i < repo.targets.size(); i++)
     {
-        cout << "Target #" << i << endl;
-        cout << "Type: " << repo.targets[i].type << endl;
-        cout << "Platform: " << repo.targets[i].platform << endl;
-        cout << "File: " << repo.targets[i].filenameOutput << endl;
-
-        for (int s = 0; s < repo.targets[i].sourceFiles.size(); s++)
-        {
-            cout << "\tSource file (" << repo.targets[i].sourceFiles[s].type << "): " << repo.targets[i].sourceFiles[s].filename << endl;
-        }
+        repo.targets[i].initObjectFiles();
+        cout << "(Type: " << repo.targets[i].type << ", ";
+        cout << "Platform: " << repo.targets[i].platform << ", ";
+        cout << "File: " << repo.targets[i].filenameOutput << ")" << endl;
 
         for (int s = 0; s < repo.targets[i].sourceGroupIds.size(); s++)
         {
             cout << "\tSource group: " << repo.targets[i].sourceGroupIds[s] << endl;
         }
 
-        cout << endl;
+        if (repo.targets[i].platform != "win32")
+        {
+            cout << "\tSkipping this target because of incompatible platform." << endl;
+            continue;
+        }
+
+        for (int s = 0; s < repo.targets[i].compileJobs.size(); s++)
+        {
+            cout << "\tCompiling " << repo.targets[i].compileJobs[s].source.filename << " -> " << repo.targets[i].compileJobs[s].object.filename << "... ";
+            repo.targets[i].compileJobs[s].execute();
+            cout << "done!" << endl;
+        }
     }
 
     return 0;
