@@ -49,6 +49,10 @@ int main(int argc, char** argv)
             repo.targets[i].compileJobs[s].execute();
             cout << "done!" << endl;
         }
+
+        cout << "\tLinking all object files to " << repo.targets[i].filenameOutput << "... ";
+        repo.targets[i].linkObjects(repo.sourceGroups);
+        cout << "done!" << endl;
     }
 
     return 0;

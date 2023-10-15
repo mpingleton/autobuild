@@ -51,6 +51,7 @@ public:
     std::vector<CompileJob> compileJobs;
     std::vector<std::string> sourceGroupIds;
 
+    int linkObjects(std::vector<SourceGroup> sourceGroups);
     void initObjectFiles();
 };
 
