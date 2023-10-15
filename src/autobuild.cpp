@@ -16,7 +16,6 @@ int main(int argc, char** argv)
 
     for (int i = 0; i < repo.targets.size(); i++)
     {
-        repo.targets[i].initObjectFiles();
         cout << "(Type: " << repo.targets[i].type << ", ";
         cout << "Platform: " << repo.targets[i].platform << ", ";
         cout << "File: " << repo.targets[i].filenameOutput << ")" << endl;
@@ -29,16 +28,13 @@ int main(int argc, char** argv)
         if (repo.targets[i].platform != "win32")
         {
             cout << "\tSkipping this target because of incompatible platform." << endl;
-            continue;
         }
-
-        cout << "\tCompiling source files for this target...";
-        repo.targets[i].executeCompileJobs();
-        cout << "done!" << endl;
-
-        cout << "\tLinking all object files to " << repo.targets[i].filenameOutput << "... ";
-        repo.targets[i].linkObjects(repo.sourceGroups);
-        cout << "done!" << endl;
+        else
+        {
+            cout << "\tBuilding this target... ";
+            repo.targets[i].build(repo.sourceGroups);
+            cout << "done!" << endl;
+        }
     }
 
     return 0;
